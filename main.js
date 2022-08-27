@@ -1,12 +1,17 @@
 const bodyWrapper = document.querySelector("#bodyWrapper");
+const grid = document.querySelector("#grid");
 
-let grid = document.createElement('div');
-bodyWrapper.appendChild(grid);
-
-for(i = 0; i < 16; i++) {
+for(i = 0; i < 16; i++){
     let gridDiv = document.createElement('div');
     grid.appendChild(gridDiv);
 }
+
+// CSS for grid div
+
+grid.style.display = "grid";
+grid.style.backgroundColor = "blue";
+
+//
 
 
 

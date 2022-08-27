@@ -17,10 +17,10 @@ body {
     color: #2266d4;
 }
 
-.bodyWrapper{
+#bodyWrapper{
     display:flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 
 }
 .optionsOutline {
@@ -49,7 +49,7 @@ button {
     margin-top:30px;
 }
 
-.grid {
+/* .grid {
     color: white;
     display: grid;
-}
+} */
