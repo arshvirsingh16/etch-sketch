@@ -32,6 +32,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: #121212 solid 5px;
 }
 
 .buttonOptions {
@@ -53,8 +54,8 @@ button {
 #gridMain {
     color: white;
     display: grid;
-    background-color: #2266d4;
-    border: #2f333a solid;
+    background-color: #2f333a;
+    border: #121212 solid 5px;
     height: 500px;
     width: 500px;
     grid-template-columns: repeat(4, 1fr);
@@ -64,5 +65,5 @@ button {
 .gridPiece {
     height: auto;
     width: auto;
-    border: #121212 solid 2px;
+    border: #121212 solid 1px;
 }
