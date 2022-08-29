@@ -1,19 +1,17 @@
-//Temporary Constants
-const tColor = "black";
-
 //Variables
 let currentButton = 'default';
 let defaultColor = 'white';
 let chosenColor = '';
+let eraserColor = '';
 
 //CONSTANTS
-const bodyWrapper = document.querySelector("#bodyWrapper");
-const gridMain = document.querySelector("#gridMain");
+const bodyWrapper = document.getElementById("bodyWrapper");
+const gridMain = document.getElementById("gridMain");
 const gridPieces = document.querySelectorAll("#gridPiece");
-const colorButton = document.querySelector("#pen-color"); 
-const eraserButton = document.querySelector("#eraser");
-const gridButton = document.querySelector("#grid-size");
-const clearButton = document.querySelector("clear");
+const colorButton = document.getElementById("pen-color"); 
+const eraserButton = document.getElementById("eraser");
+const gridButton = document.getElementById("grid-size");
+const clearButton = document.getElementById("clear");
 
 //GRID
 for(i = 0; i < 16; i++){
@@ -37,35 +35,44 @@ function pickColor() {
 eraserButton.addEventListener('click', eraseColor);
 function eraseColor() {
     currentButton = 'eColor';
-    chosenColor = 'white';
+    let color = window.prompt("Color");
+
+    eraserColor = color.toLowerCase();
     console.log(currentButton);
+    console.log(eraserColor);
 }
 
 clearButton.addEventListener('click', clearAll);
 function clearAll() {
-    gridPieces.target.style.backgroundColor = "yellow";
+    gridPieces.forEach(gridPiece => {
+        gridPiece.style.backgroundColor = "black";
+    });
 }
 
 
 
-//Drawing Function
+//Drawing Functions
 
 function colorGridPiece(e) {
     if(e.type == 'mouseover' && e.type != 'mousedown') {
         return;
     }
 
-    else if(currentButton == 'default'){
+    if(e.type == 'mousedown') {
+
+    if(currentButton === 'default'){
         e.target.style.backgroundColor = defaultColor;
     }
 
-    else if(currentButton == 'bColor') {
+    else if(currentButton === 'bColor') {
         e.target.style.backgroundColor = chosenColor;
     }
 
-    else if(currentButton == 'eColor') {
-        e.target.stylebackgroundColor = chosenColor;
+    else if(currentButton === 'eColor') {
+        e.target.stylebackgroundColor = eraserColor;
     }
+}
+
 }
 
 
