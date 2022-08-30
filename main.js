@@ -2,7 +2,8 @@
 let currentButton = 'default';
 let defaultColor = 'white';
 let chosenColor = '';
-
+let defaultSize = 4;
+let newSize;
 
 //CONSTANTS
 const bodyWrapper = document.getElementById("bodyWrapper");
@@ -11,9 +12,10 @@ const colorButton = document.getElementById("pen-color");
 const eraserButton = document.getElementById("eraser");
 const gridButton = document.getElementById("grid-size");
 const clearButton = document.getElementById("clear");
+const slider = document.getElementById("gridSlider");
 
 //GRID
-for(i = 0; i < 16; i++){
+for(i = 0; i < 64; i++){
     let gridPiece = document.createElement('div');
     gridPiece.className = "gridPiece"; 
     gridPiece.addEventListener('mouseover', colorGridPiece);
@@ -22,6 +24,26 @@ for(i = 0; i < 16; i++){
 }
 
 const gridPieces = document.querySelectorAll(".gridPiece");
+
+//Grid Size Slider Function
+
+var userOutput = document.getElementById("value");
+
+function changeGridSize(newSize) {
+    gridMain.style.gridTemplateColumns = `repeat(${newSize}, 1fr)`;
+    gridMain.style.gridTemplateRows = `repeat(${newSize}, 1fr)`;
+}
+
+changeGridSize(slider.value);
+userOutput.innerHTML = slider.value + ' x ' + slider.value;
+//To show the value when the user slides
+slider.oninput = function() {
+    userOutput.innerHTML = this.value +' x '+ this.value;
+    newSize = this.value;
+    console.log(newSize);
+    changeGridSize(newSize);
+}
+
 
 //Buttons Functions
 colorButton.addEventListener('click', pickColor);
@@ -53,12 +75,16 @@ function clearAll() {
 console.log(gridPieces);
 
 
-//Drawing Functions
+//Drawing Function
+
+//This will allow the user to click and drag to draw
+// let mousedown = false;
+// document.body.onmousedown = () => (mouseDown = true);
+// document.body.onmouseup = () => (mouseDown = false);
 
 function colorGridPiece(e) {
-    if(e.type == 'mouseover' && e.type != 'mousedown') {
-        return;
-    }
+    if(e.type === 'mouseover' && !mousedown) return
+    
 
     if(currentButton === 'default'){
         e.target.style.backgroundColor = defaultColor;
@@ -73,6 +99,8 @@ function colorGridPiece(e) {
     }
 
 }
+
+
 
 
 
