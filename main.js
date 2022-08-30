@@ -2,12 +2,11 @@
 let currentButton = 'default';
 let defaultColor = 'white';
 let chosenColor = '';
-let eraserColor = '';
+
 
 //CONSTANTS
 const bodyWrapper = document.getElementById("bodyWrapper");
 const gridMain = document.getElementById("gridMain");
-const gridPieces = document.querySelectorAll("#gridPiece");
 const colorButton = document.getElementById("pen-color"); 
 const eraserButton = document.getElementById("eraser");
 const gridButton = document.getElementById("grid-size");
@@ -22,6 +21,8 @@ for(i = 0; i < 16; i++){
     gridMain.appendChild(gridPiece);
 }
 
+const gridPieces = document.querySelectorAll(".gridPiece");
+
 //Buttons Functions
 colorButton.addEventListener('click', pickColor);
 function pickColor() {
@@ -35,20 +36,21 @@ function pickColor() {
 eraserButton.addEventListener('click', eraseColor);
 function eraseColor() {
     currentButton = 'eColor';
-    let color = window.prompt("Color");
 
-    eraserColor = color.toLowerCase();
-    console.log(currentButton);
-    console.log(eraserColor);
+
+    chosenColor = "#2f333a";
+    // console.log(currentButton);
+    // console.log(eraserColor);
 }
 
 clearButton.addEventListener('click', clearAll);
 function clearAll() {
     gridPieces.forEach(gridPiece => {
-        gridPiece.style.backgroundColor = "black";
+        gridPiece.style.backgroundColor = "#2f333a";
     });
 }
 
+console.log(gridPieces);
 
 
 //Drawing Functions
@@ -57,8 +59,6 @@ function colorGridPiece(e) {
     if(e.type == 'mouseover' && e.type != 'mousedown') {
         return;
     }
-
-    if(e.type == 'mousedown') {
 
     if(currentButton === 'default'){
         e.target.style.backgroundColor = defaultColor;
@@ -69,11 +69,12 @@ function colorGridPiece(e) {
     }
 
     else if(currentButton === 'eColor') {
-        e.target.stylebackgroundColor = eraserColor;
+        e.target.style.backgroundColor = chosenColor;
     }
-}
 
 }
+
+
 
 
 
