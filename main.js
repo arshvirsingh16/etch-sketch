@@ -4,6 +4,7 @@ let defaultColor = 'white';
 let chosenColor = '';
 let defaultSize = 4;
 let newSize;
+let activeButton = '';
 
 //CONSTANTS
 const bodyWrapper = document.getElementById("bodyWrapper");
@@ -13,9 +14,11 @@ const eraserButton = document.getElementById("eraser");
 const gridButton = document.getElementById("grid-size");
 const clearButton = document.getElementById("clear");
 const slider = document.getElementById("gridSlider");
+const btns = document.querySelectorAll(".button");
+
 
 //GRID
-for(i = 0; i < 64; i++){
+for(i = 0; i < 16; i++){
     let gridPiece = document.createElement('div');
     gridPiece.className = "gridPiece"; 
     gridPiece.addEventListener('mouseover', colorGridPiece);
@@ -25,14 +28,11 @@ for(i = 0; i < 64; i++){
 
 const gridPieces = document.querySelectorAll(".gridPiece");
 
+//Default Grid Size
+
+
 //Grid Size Slider Function
-
 var userOutput = document.getElementById("value");
-
-function changeGridSize(newSize) {
-    gridMain.style.gridTemplateColumns = `repeat(${newSize}, 1fr)`;
-    gridMain.style.gridTemplateRows = `repeat(${newSize}, 1fr)`;
-}
 
 changeGridSize(slider.value);
 userOutput.innerHTML = slider.value + ' x ' + slider.value;
@@ -40,8 +40,12 @@ userOutput.innerHTML = slider.value + ' x ' + slider.value;
 slider.oninput = function() {
     userOutput.innerHTML = this.value +' x '+ this.value;
     newSize = this.value;
-    console.log(newSize);
     changeGridSize(newSize);
+}
+
+function changeGridSize(newSize) {
+    gridMain.style.gridTemplateColumns = `repeat(${newSize}, 1fr)`;
+    gridMain.style.gridTemplateRows = `repeat(${newSize}, 1fr)`;
 }
 
 
@@ -58,11 +62,7 @@ function pickColor() {
 eraserButton.addEventListener('click', eraseColor);
 function eraseColor() {
     currentButton = 'eColor';
-
-
     chosenColor = "#2f333a";
-    // console.log(currentButton);
-    // console.log(eraserColor);
 }
 
 clearButton.addEventListener('click', clearAll);
@@ -72,16 +72,10 @@ function clearAll() {
     });
 }
 
-console.log(gridPieces);
+
 
 
 //Drawing Function
-
-//This will allow the user to click and drag to draw
-// let mousedown = false;
-// document.body.onmousedown = () => (mouseDown = true);
-// document.body.onmouseup = () => (mouseDown = false);
-
 function colorGridPiece(e) {
     if(e.type === 'mouseover' && !mousedown) return
     
@@ -99,6 +93,60 @@ function colorGridPiece(e) {
     }
 
 }
+
+// This will allow the user to click and drag to draw
+// let mousedown = false;
+// document.body.onmousedown = () => (mouseDown = true);
+// document.body.onmouseup = () => (mouseDown = false);
+
+//Button Active, Not Active function
+btns.forEach(button => {
+    button.addEventListener('click', (e) => {
+        activeButton = button.value;
+        console.log(activeButton);
+        activateButton(activeButton);
+    });
+})
+
+function activateButton(activeButton) {
+    if(activeButton == "color-button") {
+        colorButton.style.background = "black";
+        deactivateButton(activeButton);
+    }
+
+    else if(activeButton == "eraser-button") {
+        eraserButton.style.background = "black";
+        deactivateButton(activeButton);
+    }
+
+    else if(activeButton == "clear-button") {
+        clearButton.style.background = "black";
+        deactivateButton(activeButton);
+        setTimeout(() => {
+            clearButton.style.background = "#2f333a"
+        }, 100);
+    }
+}
+
+function deactivateButton(activeButton) {
+    if(activeButton == "color-button") {
+        eraserButton.style.background = "#2f333a";
+        clearButton.style.background = "#2f333a";
+    }
+
+    else if(activeButton == "eraser-button") {
+        colorButton.style.background = "#2f333a";
+        clearButton.style.background = "#2f333a";
+    }
+
+    else if(activeButton == "clear-button") {
+        colorButton.style.background = "#2f333a";
+        eraserButton.style.background = "#2f333a";
+    }
+}
+
+
+
 
 
 
