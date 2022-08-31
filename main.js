@@ -17,36 +17,67 @@ const slider = document.getElementById("gridSlider");
 const btns = document.querySelectorAll(".button");
 
 
-//GRID
-for(i = 0; i < 16; i++){
-    let gridPiece = document.createElement('div');
-    gridPiece.className = "gridPiece"; 
-    gridPiece.addEventListener('mouseover', colorGridPiece);
-    gridPiece.addEventListener('mousedown', colorGridPiece);
-    gridMain.appendChild(gridPiece);
-}
 
-const gridPieces = document.querySelectorAll(".gridPiece");
 
-//Default Grid Size
+// GRID
+// for(i = 0; i < 16; i++){
+//     let gridPiece = document.createElement('div');
+//     gridPiece.className = "gridPiece"; 
+//     gridPiece.addEventListener('mouseover', colorGridPiece);
+//     gridPiece.addEventListener('mousedown', colorGridPiece);
+//     gridMain.appendChild(gridPiece);
+// }
+
+// function defaultGrid() {
+//     gridMain.style.gridTemplateColumns = 'repeat(33, 1fr)';
+//     gridMain.style.gridTemplateRows = 'repeat(33, 1fr)';
+
+// }
+
+
+// window.onload = () => {
+//     defaultGrid();
+// }
 
 
 //Grid Size Slider Function
-var userOutput = document.getElementById("value");
+let userOutput = document.getElementById("value");
 
 changeGridSize(slider.value);
 userOutput.innerHTML = slider.value + ' x ' + slider.value;
+
 //To show the value when the user slides
 slider.oninput = function() {
     userOutput.innerHTML = this.value +' x '+ this.value;
     newSize = this.value;
-    changeGridSize(newSize);
+    changeGrid(newSize);
 }
 
 function changeGridSize(newSize) {
     gridMain.style.gridTemplateColumns = `repeat(${newSize}, 1fr)`;
     gridMain.style.gridTemplateRows = `repeat(${newSize}, 1fr)`;
+
+    for(i = 0; i < newSize * newSize; i++){
+        let gridPiece = document.createElement('div');
+        gridPiece.className = "gridPiece"; 
+        gridPiece.addEventListener('mouseover', colorGridPiece);
+        gridPiece.addEventListener('mousedown', colorGridPiece);
+        // gridPiece.style.border = "#121212 solid 1px"
+        gridMain.appendChild(gridPiece);
+    }
 }
+
+//Will clear the grid before changing to new sized grid
+function changeGrid(newSize) {
+    clearAll();
+    changeGridSize(newSize);
+}
+
+const gridPieces = document.querySelectorAll(".gridPiece");
+console.log(gridPieces);
+
+
+
 
 
 //Buttons Functions
@@ -95,9 +126,9 @@ function colorGridPiece(e) {
 }
 
 // This will allow the user to click and drag to draw
-// let mousedown = false;
-// document.body.onmousedown = () => (mouseDown = true);
-// document.body.onmouseup = () => (mouseDown = false);
+let mousedown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
 
 //Button Active, Not Active function
 btns.forEach(button => {
@@ -144,7 +175,6 @@ function deactivateButton(activeButton) {
         eraserButton.style.background = "#2f333a";
     }
 }
-
 
 
 
