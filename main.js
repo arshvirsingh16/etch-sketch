@@ -1,11 +1,10 @@
 //Variables
-let currentButton = 'default';
-let defaultColor = 'white';
-let chosenColor = '';
+let currentButton = 'bColor';
 let defaultSize = 4;
 let newSize;
 let activeButton = '';
-
+let chosenColor = '#ffff';
+let hex = '';
 //CONSTANTS
 const bodyWrapper = document.getElementById("bodyWrapper");
 const gridMain = document.getElementById("gridMain");
@@ -20,12 +19,16 @@ const btns = document.querySelectorAll(".button");
 
 //Color Picker Wheel
 const colorPicker = new iro.ColorPicker("#color-picker", {
-    width:135, color: "#ffff"
+    width: 135, color: "#ffff"
 })
+
 colorPicker.on('color:change', function(color) {
     colorIndicator.style.backgroundColor = color.hexString;
-    console.log(color.hexSting);
+    hex = colorPicker.color.hexString;
+    chosenColor = hex;
 });
+
+
 
 
 //Grid Size Slider Function
@@ -62,20 +65,12 @@ function changeGrid(newSize) {
 }
 
 const gridPieces = document.querySelectorAll(".gridPiece");
-console.log(gridPieces);
-
-
-
-
 
 //Buttons Functions
 colorButton.addEventListener('click', pickColor);
 function pickColor() {
     currentButton = 'bColor';
-    let color = window.prompt("Which color?");
-    let newColor = color.toLowerCase();
-    console.log(newColor);
-    chosenColor = newColor;
+    chosenColor = hex;
 }
 
 eraserButton.addEventListener('click', eraseColor);
@@ -91,19 +86,16 @@ function clearAll() {
     });
 }
 
-
+let clrBtn = colorButton.classList;
+clrBtn.add("active");
+// currentButton = 'bColor';
 
 
 //Drawing Function
 function colorGridPiece(e) {
     if(e.type === 'mouseover' && !mousedown) return
-    
 
-    if(currentButton === 'default'){
-        e.target.style.backgroundColor = defaultColor;
-    }
-
-    else if(currentButton === 'bColor') {
+    if(currentButton === 'bColor') {
         e.target.style.backgroundColor = chosenColor;
     }
 
@@ -129,7 +121,7 @@ btns.forEach(button => {
 
 function activateButton(activeButton) {
     if(activeButton == "color-button") {
-        let clrBtn = colorButton.classList;
+        clrBtn = colorButton.classList;
         clrBtn.add("active");
         deactivateButton(activeButton);
     }
@@ -140,11 +132,11 @@ function activateButton(activeButton) {
         deactivateButton(activeButton);
     }
 
-    // else if(activeButton == "clear-button") {
-    //     let clearBtn = clearButton.classList;
-    //     clearBtn.add("active");
-    //     deactivateButton(activeButton);
-    // }
+    else if(activeButton == "clear-button") {
+        // let clearBtn = clearButton.classList;
+        // clearBtn.add("active");
+        deactivateButton(activeButton);
+    }
 }
 
 function deactivateButton(activeButton) {
@@ -162,12 +154,12 @@ function deactivateButton(activeButton) {
         clearBtn.remove("active");
     }
 
-    // else if(activeButton == "clear-button") {
-    //     let clrBtn = colorButton.classList;
-    //     clrBtn.remove("active");
-    //     let ersrBtn = eraserButton.classList;
-    //     ersrBtn.remove("active");
-    // }
+    else if(activeButton == "clear-button") {
+        let clrBtn = colorButton.classList;
+        clrBtn.remove("active");
+        let ersrBtn = eraserButton.classList;
+        ersrBtn.remove("active");
+    }
 }
 
 
