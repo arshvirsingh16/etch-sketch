@@ -4,7 +4,8 @@ let defaultSize = 4;
 let newSize;
 let activeButton = '';
 let chosenColor = '#ffff';
-let hex = '';
+let hex = '#ffff';
+
 //CONSTANTS
 const bodyWrapper = document.getElementById("bodyWrapper");
 const gridMain = document.getElementById("gridMain");
@@ -13,9 +14,12 @@ const colorButton = document.getElementById("pen-color");
 const eraserButton = document.getElementById("eraser");
 const gridButton = document.getElementById("grid-size");
 const clearButton = document.getElementById("clear");
-const rainbowButton = document.getElementById("rainbow");
 const slider = document.getElementById("gridSlider");
 const btns = document.querySelectorAll(".button");
+
+//Variables dependent on constants
+let clrBtn = colorButton.classList;
+let ersrBtn = eraserButton.classList;
 
 //Color Picker Wheel
 const colorPicker = new iro.ColorPicker("#color-picker", {
@@ -26,9 +30,8 @@ colorPicker.on('color:change', function(color) {
     colorIndicator.style.backgroundColor = color.hexString;
     hex = colorPicker.color.hexString;
     chosenColor = hex;
+    console.log(chosenColor);
 });
-
-
 
 
 //Grid Size Slider Function
@@ -71,6 +74,7 @@ colorButton.addEventListener('click', pickColor);
 function pickColor() {
     currentButton = 'bColor';
     chosenColor = hex;
+    console.log(chosenColor);
 }
 
 eraserButton.addEventListener('click', eraseColor);
@@ -86,9 +90,9 @@ function clearAll() {
     });
 }
 
-let clrBtn = colorButton.classList;
+//WINDOW ONLOAD
 clrBtn.add("active");
-// currentButton = 'bColor';
+
 
 
 //Drawing Function
@@ -98,6 +102,8 @@ function colorGridPiece(e) {
     if(currentButton === 'bColor') {
         e.target.style.backgroundColor = chosenColor;
     }
+
+    
 
     else if(currentButton === 'eColor') {
         e.target.style.backgroundColor = chosenColor;
@@ -121,44 +127,27 @@ btns.forEach(button => {
 
 function activateButton(activeButton) {
     if(activeButton == "color-button") {
-        clrBtn = colorButton.classList;
         clrBtn.add("active");
         deactivateButton(activeButton);
     }
-        
+
     else if(activeButton == "eraser-button") {
-        let ersrBtn = eraserButton.classList;
         ersrBtn.add("active");
         deactivateButton(activeButton);
     }
 
     else if(activeButton == "clear-button") {
-        // let clearBtn = clearButton.classList;
-        // clearBtn.add("active");
         deactivateButton(activeButton);
     }
 }
 
 function deactivateButton(activeButton) {
     if(activeButton == "color-button") {
-        let ersrBtn = eraserButton.classList;
         ersrBtn.remove("active");
-        let clearBtn = clearButton.classList;
-        clearBtn.remove("active");
-    }
-        
-    else if(activeButton == "eraser-button") {
-        let clrBtn = colorButton.classList;
-        clrBtn.remove("active");
-        let clearBtn = clearButton.classList;
-        clearBtn.remove("active");
     }
 
-    else if(activeButton == "clear-button") {
-        let clrBtn = colorButton.classList;
+    else if(activeButton == "eraser-button") {
         clrBtn.remove("active");
-        let ersrBtn = eraserButton.classList;
-        ersrBtn.remove("active");
     }
 }
 
