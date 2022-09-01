@@ -25,8 +25,8 @@ body {
 
 }
 .optionsOutline {
-    height: 500px;
-    width: 300px;
+    height: 1000px;
+    width: 500px;
     background-color: #2f333a;
     display:flex;
     flex-direction: column;
@@ -35,30 +35,63 @@ body {
     border: #121212 solid 5px;
 }
 
+.colorPickerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.color-indicator {
+    width:200px;
+    height:200px;
+    background-color: #ffff;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
 .buttonOptions {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    align-items: center;
 }
 
-button {
-    width: 225px;
-    height: 50px;
+.button {
+    width: 400px;
+    height: 100px;
     color: #2266d4;
     border: #2266d4 solid 5px;
     border-radius: .5rem;
     background-color: #2f333a;
     margin-top:30px;
-    font-size: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    --border-size: 2px;
+    transition: 0.3s;
 }
+
+
+.button:hover {
+    color: white; 
+    background-color: #2266d4;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+}
+
+.active {
+    color: white; 
+    background-color: #2266d4;
+}
+
 
 #gridMain {
     color: white;
     display: grid;
     background-color: #2f333a;
     border: #121212 solid 5px;
-    height: 500px;
-    width: 500px;
+    height: 1000px;
+    width: 1000px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
@@ -66,7 +99,6 @@ button {
 .gridPiece {
     height: auto;
     width: auto;
-    /* border: #121212 solid 1px; */
 }
 
 .sliderBox {
@@ -75,7 +107,8 @@ button {
     align-items: center;
     color: #2266d4;
     margin-top: 30px;
-    font-size: 22px;
+    font-size: 30px;
+    width:450px;
 }
 
 .slider {

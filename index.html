@@ -7,6 +7,7 @@
     <title>Etch-A-Sketch</title>
     <link rel = "stylesheet" href = "style.css">
     <script src = "main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 <body>
     <div class = "Container">
@@ -17,26 +18,33 @@
 
         <div id="bodyWrapper">
         <div class="optionsOutline">
-            <div class = buttonOptions>
-                <button id = "pen-color" class = "button"
-                value = "color-button">
+            <div class = buttonOptions>\
+                <div class="colorPickerContainer">
+                    <div class="colorPicker"></div>
+                    <div id = "color-indicator" class="color-indicator"></div>
+                    <div id="color-picker"></div>
+                </div>
+                
+                <button id = "pen-color" class = "button" value = "color-button">
                     COLOR
                 </button>
-                <button id = "eraser" class = "button" value = 
-                "eraser-button">
+
+                <button id = "rainbow" class = "button" value = "rainbow-button">
+                    RAINBOW
+                </button>
+
+                <button id = "eraser" class = "button" value = "eraser-button">
                     ERASER
                 </button>
                 
-                <button id = "clear" class = "button" value = 
-                "clear-button">
+                <button id = "clear" class = "button" value = "clear-button">
                     CLEAR
                 </button>
 
                 <div class="sliderBox">
                     <p>GRID SIZE</p>
-                  <input type = "range" min = '1' max = '64'
-                   id = gridSlider class = "slider">
-                   <span id="value"></span>
+                    <input type = "range" min = '1' max = '64' id = gridSlider class = "slider">
+                    <span id="value"></span>
                 </div>
                
 

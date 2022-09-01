@@ -9,35 +9,23 @@ let activeButton = '';
 //CONSTANTS
 const bodyWrapper = document.getElementById("bodyWrapper");
 const gridMain = document.getElementById("gridMain");
+const colorIndicator = document.getElementById('color-indicator');
 const colorButton = document.getElementById("pen-color"); 
 const eraserButton = document.getElementById("eraser");
 const gridButton = document.getElementById("grid-size");
 const clearButton = document.getElementById("clear");
+const rainbowButton = document.getElementById("rainbow");
 const slider = document.getElementById("gridSlider");
 const btns = document.querySelectorAll(".button");
 
-
-
-
-// GRID
-// for(i = 0; i < 16; i++){
-//     let gridPiece = document.createElement('div');
-//     gridPiece.className = "gridPiece"; 
-//     gridPiece.addEventListener('mouseover', colorGridPiece);
-//     gridPiece.addEventListener('mousedown', colorGridPiece);
-//     gridMain.appendChild(gridPiece);
-// }
-
-// function defaultGrid() {
-//     gridMain.style.gridTemplateColumns = 'repeat(33, 1fr)';
-//     gridMain.style.gridTemplateRows = 'repeat(33, 1fr)';
-
-// }
-
-
-// window.onload = () => {
-//     defaultGrid();
-// }
+//Color Picker Wheel
+const colorPicker = new iro.ColorPicker("#color-picker", {
+    width:135, color: "#ffff"
+})
+colorPicker.on('color:change', function(color) {
+    colorIndicator.style.backgroundColor = color.hexString;
+    console.log(color.hexSting);
+});
 
 
 //Grid Size Slider Function
@@ -141,41 +129,46 @@ btns.forEach(button => {
 
 function activateButton(activeButton) {
     if(activeButton == "color-button") {
-        colorButton.style.background = "black";
+        let clrBtn = colorButton.classList;
+        clrBtn.add("active");
         deactivateButton(activeButton);
     }
-
+        
     else if(activeButton == "eraser-button") {
-        eraserButton.style.background = "black";
+        let ersrBtn = eraserButton.classList;
+        ersrBtn.add("active");
         deactivateButton(activeButton);
     }
 
-    else if(activeButton == "clear-button") {
-        clearButton.style.background = "black";
-        deactivateButton(activeButton);
-        setTimeout(() => {
-            clearButton.style.background = "#2f333a"
-        }, 100);
-    }
+    // else if(activeButton == "clear-button") {
+    //     let clearBtn = clearButton.classList;
+    //     clearBtn.add("active");
+    //     deactivateButton(activeButton);
+    // }
 }
 
 function deactivateButton(activeButton) {
     if(activeButton == "color-button") {
-        eraserButton.style.background = "#2f333a";
-        clearButton.style.background = "#2f333a";
+        let ersrBtn = eraserButton.classList;
+        ersrBtn.remove("active");
+        let clearBtn = clearButton.classList;
+        clearBtn.remove("active");
     }
-
+        
     else if(activeButton == "eraser-button") {
-        colorButton.style.background = "#2f333a";
-        clearButton.style.background = "#2f333a";
+        let clrBtn = colorButton.classList;
+        clrBtn.remove("active");
+        let clearBtn = clearButton.classList;
+        clearBtn.remove("active");
     }
 
-    else if(activeButton == "clear-button") {
-        colorButton.style.background = "#2f333a";
-        eraserButton.style.background = "#2f333a";
-    }
+    // else if(activeButton == "clear-button") {
+    //     let clrBtn = colorButton.classList;
+    //     clrBtn.remove("active");
+    //     let ersrBtn = eraserButton.classList;
+    //     ersrBtn.remove("active");
+    // }
 }
-
 
 
 
