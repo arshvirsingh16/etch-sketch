@@ -56,8 +56,8 @@ function changeGridSize(newSize) {
     for(i = 0; i < newSize * newSize; i++){
         let gridPiece = document.createElement('div');
         gridPiece.className = "gridPiece"; 
-        gridPiece.addEventListener('mouseover', colorGridPiece);
         gridPiece.addEventListener('mousedown', colorGridPiece);
+        gridPiece.addEventListener('mouseover', colorGridPiece);
         // gridPiece.style.border = "#121212 solid 1px"
         gridMain.appendChild(gridPiece);
     }
@@ -100,18 +100,17 @@ function clearAll() {
 //WINDOW ONLOAD
 clrBtn.add("active");
 
-let mousedown = false;
-document.body.onmousedown = () => (mouseDown = true)
-document.body.onmouseup = () => (mouseDown = false)
+let mouseDown = false;
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
 
-console.log(mousedown);
+
 
 //Drawing Function
 function colorGridPiece(e) {
-    if(e.type == 'mouseover' && !mousedown) {
+    if(e.type === 'mouseover' && !mouseDown) {
         return;
     }
-
     
     if(currentButton === 'bColor') {
         e.target.style.backgroundColor = chosenColor;
