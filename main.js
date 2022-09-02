@@ -103,7 +103,7 @@ clrBtn.add("active");
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
-
+console.log(mouseDown);
 
 
 //Drawing Function
